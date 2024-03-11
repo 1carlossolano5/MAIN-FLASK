@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lagn="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Index.css')}}">
+</head>
+
+<div class="container">
+    <h1>LISTADO DE USUARIO</h1>
+    <table>
+
+    <tr class="columna">
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Usuario</th>
+        <th>Acciones:</th>
+    </tr>
+    <tbody>
+        {% for usuario in personas %}
+        <tr class="filas">
+            <td>{{ usuario[0] }}</td> 
+            <td>{{ usuario[1] }}</td>
+            <td>{{ usuario[2] }}</td>
+            <td>{{ usuario[3] }}</td>
+            <td>{{ usuario[4] }}</td>
+            <td>{{ usuario[5] }}</td>
+            <td>{{ usuario[6] }}</td>
+            <td>
+                <a href="{{url_for('editar_usuario',id=usuario[0])}}">Editar</a>
+                <a href="{{url_for('eliminar_usuario' ,id=usuario[0])}}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+    </table>
+
+
+</div>
+
+
+</html>

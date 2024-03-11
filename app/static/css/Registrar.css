@@ -1,0 +1,65 @@
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #30399c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cab1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+h1 {
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    margin: 0 0 50px 0;
+    border-radius: 4px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="text"], input[type="email"], input[type="number"], input[type="password"] {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #30399c;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder {
+    color: #ccc;
+}

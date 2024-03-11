@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Editar.css')}}">
+</head>
+<body>
+    <h1>EDITAR PERSONAS</h1>
+    <form method="POST" action="">
+        <label>Codigo: </label>
+        <input type="number" name="polperso" value="{{ personas[0] }}" disabled><br>
+        <label>Nombre:</label>
+        <input type="text" name="nombreperso" value="{{ personas[1] }}"><br>
+        <label>Apellido:</label>
+        <input type="text" name="apellidoperso" value="{{ personas[2] }}"><br>
+        <label>Email:</label>
+        <input type="email" name="emailperso" value="{{ personas[3] }}"><br>
+        <label>Dirección:</label>
+        <input type="text" name="direccionperso" value="{{ personas[4] }}"><br>
+        <label>Teléfono:</label>
+        <input type="number" name="telefonoperso" value="{{ personas[5] }}"><br>
+        <label>Usuario:</label>
+        <input type="text" name="usuarioperso" value="{{ personas[6] }}" disabled><br>
+        <label>Contraseña:</label>  
+        <input type="password" name="contraseñaperso" value="{{ personas[7] }}"><br>
+        <input type="submit" value="Guardar Cambios">
+    
+    </form>
+</body>
+</html>
