@@ -1,10 +1,10 @@
 from flask import Flask,render_template,redirect,url_for,flash, request,session
 import mysql.connector
-import bcrypt
+from werkzeug.security import generate_password_hash, check_password_hash
 #Creamos una instancia de la clase Flask
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = '150104'
 #CONFIGURAR LA CONEXIÓN
 db = mysql.connector.connect(
     host="localhost",
@@ -15,11 +15,14 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
+@app.route('/password/<contraencrip>')
 def encriptarcontra(contraencrip):
     #Generar un hash de la contraseña
-    encriptar = bcrypt.hashpw(contraencrip.encode('utf-8'),bcrypt.gensalt())
-
-    return encriptar 
+    #encriptar = bcrypt.hashpw(contraencrip.encode('utf-8'),bcrypt.gensalt())
+    encriptar = generate_password_hash(contraencrip)
+    valor = check_password_hash(encriptar,contraencrip)
+    
+    return "Encritado:{0} | coincidencia:{1}".format(encriptar,valor)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -30,15 +33,17 @@ def login():
         password = request.form.get('txtcontrasena')
 
         cursor = db.cursor()
-        cursor.execute('SELECT usuarioper, contrasena FROM personas WHERE usuarioper = %s ', (username,))
-        usuarios = cursor.fetchone()
+        cursor.execute("SELECT usuarioper, contrasena FROM personas WHERE usuarioper = %s ", (username,))
+        resultado = cursor.fetchone()
 
-        if usuarios and bcrypt.check_password_hash(usuarios[7],password):
+        if resultado or encriptarcontra(password) == resultado[1]:
             session['usuario']= username
             return redirect(url_for('lista'))
         else:
             error = 'Credenciales Invalidas. Porfavor intentarlo de nuevo'
-            return render_template('login.html', error)    
+            return render_template('login.html', error=error)    
+        
+    return render_template('login.html')
 
 #Definir rutas
 
