@@ -22,28 +22,40 @@ def encriptarcontra(contraencrip):
     encriptar = generate_password_hash(contraencrip)
     valor = check_password_hash(encriptar,contraencrip)
     
-    return "Encritado:{0} | coincidencia:{1}".format(encriptar,valor)
+    #return "Encritado:{0} | coincidencia:{1}".format(encriptar,valor)
+    return valor
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
     if request.method == 'POST':
         #verificar las credenciales del usuario
-        username = request.form.get('txtusuario')
+        usuario = request.form.get('txtusuario')
         password = request.form.get('txtcontrasena')
 
         cursor = db.cursor()
-        cursor.execute("SELECT usuarioper, contrasena FROM personas WHERE usuarioper = %s ", (username,))
-        resultado = cursor.fetchone()
+        cursor.execute(
+            "SELECT usuarioper, contrasena FROM personas WHERE usuarioper = %s ", (usuario,))
+        usuarios = cursor.fetchone()
 
-        if resultado or encriptarcontra(password) == resultado[1]:
-            session['usuario']= username
+        if usuarios and check_password_hash(usuarios[1], password):
+            session['usuario']= usuario
             return redirect(url_for('lista'))
         else:
-            error = 'Credenciales Invalidas. Porfavor intentarlo de nuevo'
-            return render_template('login.html', error=error)    
+            print("Credenciales invalidas")
+            print("Credeciales invalidas. por favor intentarlo de nuevo")
+            return render_template('login.html')    
         
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    #Eliminar el usuario de la sesión
+    session.pop('usuario', None)
+
+    print("La sesion se cerro correctamente")
+    return redirect/url_for(('login'))
 
 #Definir rutas
 
@@ -66,9 +78,16 @@ def registrar_usuario():
         Usuario = request.form.get('usuario')
         Contrasena = request.form.get('contrasena')
 
-        Contrasenaencriptada = encriptarcontra(Contrasena)
+        Contrasenaencriptada = generate_password_hash(Contrasena)
 
-    #insertar datos a la tabla personas
+        cursor = db.cursor()
+        cursor.execute(
+            "SELECT * FROM personas WHERE usuarioper = %s OR emailper= %s", (Usuario, Email))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            print('El usuario o correo ya existe')
+            return render_template('Registrar.html')
 
         cursor.execute("INSERT INTO personas(nombreper,apellidoper,emailper,direccionper,telefonoper,usuarioper,contrasena) VALUES(%s,%s,%s,%s,%s,%s,%s)",
                        (Nombres,Apellidos,Email,Direccion,Telefono,Usuario,Contrasenaencriptada))
