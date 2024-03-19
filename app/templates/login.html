@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div class="cab1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Login.css')}}">
+    <h1>INGRESO AL SISTEMA</h1>
+</div>
+</head>
+<body>
+    <form action="/login" method="POST">
+        <label for="usuario">Usuario:</label>
+        <input type="text" placeholder="Ingrese su nombre" required name="txtusuario">
+        <label for="password">Contraseña:</label>
+        <input type="password" placeholder="Ingrese su contraseña"requeried name="txtcontrasena">
+        <label>Ingresar:</label>
+        <input type="submit">
+    </form>
+</body>
+</html>

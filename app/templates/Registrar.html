@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div class="cab1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Registrar.css')}}">
+    <h1>REGISTRAR USUARIOS</h1>
+</div>
+</head>
+<body>
+    
+    <form method="POST" action="/Registrar">
+        <div class="formulario">
+        <label>Nombre:</label>
+        <input type="text" placeholder="Ingrese su nombre" required name="nombre">
+        <label>Apellido:</label>
+        <input type="text" placeholder="Ingrese su apellido"requeried name="apellido">
+        <label>Correo:</label>
+        <input type="text" placeholder="Ingrese su correo" requeried name="correo">
+        <label>Direccion:</label>
+        <input type="text" placeholder="Ingrese su dirección" required name="direccion">
+        <label>Número:</label>
+        <input type="text" placeholder="Ingrese su número" requeried name="numero">
+        <label>Nombre Usuario:</label>
+        <input type="text" placeholder="Ingrese su usuario" requeried name="usuario">
+        <label>Contraseña:</label>
+        <label>ROL</label>
+        <select id="rol" name="txtrol">
+            <option value="Administrador">Administrador </option>
+            <option value="Comprador">Comprador</option> 
+        </select>
+        <input type="password" placeholder="Ingrese su contraseña" requeried name="contrasena">
+        <label></label>
+        <input type="submit">
+    </div>
+    </form>
+</body>
+</html>
