@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add songs</title>
+</head>
+<body>
+
+    <form action="" method="POST">
+        <div class="datos">
+            <label for="name">Codigo</label>
+            <input type="text" id="id" name="id" value="{{ cancion [0] }}"  disabled/>
+        </div>
+        <div class="datos">
+            <label for="title">Titulo</label>
+            <input type="text" id="titulo" name="Titu" value="{{ cancion [1] }}"/>
+        </div>
+        <div class="datos">
+            <label for="artist">Artista</label>
+            <input type="text" id="artista" name="Arti" value="{{ cancion [2] }}"/>
+        </div>
+        <div class="datos">
+            <label for="genre">Genero</label>
+            <input type="text" id="genero" name="Gene"  value="{{ cancion [3] }}"/>
+        </div>
+        <div class="datos">
+            <label for="price">Precio</label>
+            <input type="number" id="precio" name="Preci" value="{{ cancion [4] }}"/>
+        </div>
+        <div class="datos">
+            <label for="duration">Duración</label>
+            <input type="text" id="precio" name="Dura" value="{{ cancion [5] }}" />
+        </div>
+        <div class="datos">
+            <label for="date">Fecha de lanzamiento</label>
+            <input type="date" id="fecha" name="Lanz" value="{{ cancion [6] }}"/>
+        </div>
+        <div class="datos">
+            <label for="image">Imagen</label>
+            <input type="file" id="image" name="Imagen" accept="image/*" value="{{ cancion [7] }}"/>
+        </div>
+        <button type="submit">Actualizar</button>
+
+        

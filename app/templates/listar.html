@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+
+        <tr>
+            <th>Codigo</th>
+            <th>Titulo</th>
+            <th>Artista</th>
+            <th>Genero</th>
+            <th>Precio</th>
+            <th>Duración </th>
+            <th>Fecha</th>
+            <th></th>
+
+        </tr>
+        <tbody>
+            {% for cancion in canciones %}
+            <tr>
+                <td><img src="data:image/jpeg;base64,{{cancion.imagen}}" alt="NO SALE IMAGEN" width="100"></td>
+                <td>{{cancion[0]}}</td>
+                <td>{{cancion[1]}}</td>
+                <td>{{cancion[2]}}</td>
+                <td>{{cancion[3]}}</td>
+                <td>{{cancion[4]}}</td>
+                <td>{{cancion[5]}}</td>
+                <td>{{cancion[6]}}</td>
+                <!--<td><img  alt="Portada de {{cancion[1]}}" style="width: auto;">{{cancion[7]}}</td>-->
+                <td>
+                    <a href="{{ url_for('delete_song', id=cancion[0]) }}">Eliminar</a>
+                    <a href="{{ url_for ('update_song', id=cancion[0]) }}">Editar</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+
+    </table>
+    
+</body>
+</html>
