@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Registrar.css')}}">
+
     <title>Registrar Canciones</title>
 </head>
 <body>
 
-    <form action="/REGISTRO" method="post">
+    <form action="/REGISTRO" method="post" enctype="multipart/form-data">
 
         <div class="datos">
             <label for="title">Titulo</label>

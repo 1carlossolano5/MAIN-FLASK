@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Index.css')}}">
     <title>Document</title>
 </head>
 <body>
@@ -17,24 +17,25 @@
             <th>Precio</th>
             <th>Duración </th>
             <th>Fecha</th>
-            <th></th>
+            <th>Imagen</th>
 
         </tr>
         <tbody>
             {% for cancion in canciones %}
             <tr>
+                <td>{{cancion.id_can}}</td>
+                <td>{{cancion.titulo}}</td>
+                <td>{{cancion.artista}}</td>
+                <td>{{cancion.genero}}</td>
+                <td>{{cancion.precio}}</td>
+                <td>{{cancion.duracion}}</td>
+                <td>{{cancion.lanzamiento}}</td>
                 <td><img src="data:image/jpeg;base64,{{cancion.imagen}}" alt="NO SALE IMAGEN" width="100"></td>
-                <td>{{cancion[0]}}</td>
-                <td>{{cancion[1]}}</td>
-                <td>{{cancion[2]}}</td>
-                <td>{{cancion[3]}}</td>
-                <td>{{cancion[4]}}</td>
-                <td>{{cancion[5]}}</td>
-                <td>{{cancion[6]}}</td>
+
                 <!--<td><img  alt="Portada de {{cancion[1]}}" style="width: auto;">{{cancion[7]}}</td>-->
                 <td>
-                    <a href="{{ url_for('delete_song', id=cancion[0]) }}">Eliminar</a>
-                    <a href="{{ url_for ('update_song', id=cancion[0]) }}">Editar</a>
+                    <a href="{{ url_for('delete_song', id=cancion.id_can) }}">Eliminar</a>
+                    <a href="{{ url_for ('update_song', id=cancion.id_can) }}">Editar</a>
                 </td>
             </tr>
             {%endfor%}

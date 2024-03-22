@@ -164,22 +164,23 @@ def eliminar_usuario(id):
 @app.route("/LISTAR")
 def list_song(): 
     cursor = db.cursor()
-    cursor.execute("SELECT titulo,artista,genero,precio,duracion,lanzamiento,img FROM canciones")
+    cursor.execute("SELECT id_can,titulo,artista,genero,precio,duracion,lanzamiento,img FROM canciones")
     canciones = cursor.fetchall()
 
     if canciones:
         cancioneslist = []
         for cancion in canciones:
             #Convertir la imagen formato base64
-            imagen = base64.b64encode(cancion[6].decode('utf-8'))
+            imagen = base64.b64encode(cancion[7]).decode('utf-8')
             #agregar los datos de la cancion a la lista
             cancioneslist.append({
-                'titulo':cancion[0],
-                'artista':cancion[1],
-                'genero':cancion[2],
-                'precio':cancion[3],
-                'duracion':cancion[4],
-                'lanzamiento':cancion[5],
+                'id_can':cancion[0],
+                'titulo':cancion[1],
+                'artista':cancion[2],
+                'genero':cancion[3],
+                'precio':cancion[4],
+                'duracion':cancion[5],
+                'lanzamiento':cancion[6],
                 'imagen':imagen,
             })
     
@@ -200,11 +201,13 @@ def add_song():
         Precio = request.form.get('precio')
         Duracion = request.form.get('duracion')
         Fecha = request.form.get('fecha')
-        Imagen = request.form.get('image')
+        imagen = request.files['image']
+        imagenb = imagen.read()
 
 
 
-        cursor.execute("INSERT INTO canciones (titulo, artista, genero, precio, duracion, lanzamiento,img)VALUES(%s,%s,%s,%s,%s,%s,%s)",(Titulo,Artista,Genero,Precio,Duracion,Fecha,Imagen))
+        cursor.execute("INSERT INTO canciones (titulo, artista, genero, precio, duracion, lanzamiento, img)VALUES(%s,%s,%s,%s,%s,%s,%s)",(Titulo,Artista,Genero,Precio,Duracion,Fecha,imagenb))
+        print(imagen)
         return redirect(url_for('add_song'))
     db.commit()
     return render_template("REGISTRO.html")
